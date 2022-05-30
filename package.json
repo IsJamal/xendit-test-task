@@ -12,6 +12,10 @@
     "lint": "eslint src",
     "coverage": "nyc npm run test"
   },
+  "pre-push": [
+    "lint",
+    "coverage"
+  ],
   "keywords": [
     "Xendit"
   ],
