@@ -1,0 +1,240 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Api documentation of 'Xendit Coding Exercise' server.",
+        "version": "1.0.0",
+        "title": "Xendit Coding Exercise",
+        "contact": {
+            "email": "camal.ismayilzade@gmail.com"
+        }
+    },
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "health",
+            "description": "Liveness probe"
+        },
+        {
+            "name": "rides",
+            "description": "Operation about Rides"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/health": {
+            "get": {
+                "summary": "Health check",
+                "tags": [
+                    "health"
+                ],
+                "consumes": [
+                    "text/plain"
+                ],
+                "produces": [
+                    "text/plain"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "text/plain": {
+                                "schama": {
+                                    "type": "string",
+                                    "example": "Healthy"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rides": {
+            "post": {
+                "tags": [
+                    "rides"
+                ],
+                "summary": "Create new ride",
+                "description": "This method create new ride for rider",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "ride",
+                        "required": true,
+                        "description": "Ride object that needs to be added",
+                        "schema": {
+                            "$ref": "#/definitions/RidePayload"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/RideItem"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "rides"
+                ],
+                "summary": "List rides",
+                "description": "This method list rides",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/RideItem"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rides/{id}": {
+            "get": {
+                "tags": [
+                    "rides"
+                ],
+                "summary": "Get ride by id",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of ride that needs to be fetched",
+                        "required": true,
+                        "type": "integer",
+                        "maximum": 10,
+                        "minimum": 1,
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/RideItem"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error_code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "RidePayload": {
+            "id": "Ride",
+            "type": "object",
+            "properties": {
+                "start_lat": {
+                    "type": "number",
+                    "format": "float",
+                    "example": 40.39080707999529
+                },
+                "start_long": {
+                    "type": "number",
+                    "format": "float",
+                    "example": 49.820242671837995
+                },
+                "end_lat": {
+                    "type": "number",
+                    "format": "float",
+                    "example": 40.39393261968511
+                },
+                "end_long": {
+                    "type": "number",
+                    "format": "float",
+                    "example": 49.831156580485874
+                },
+                "rider_name": {
+                    "type": "string",
+                    "example": "Jamal Ismayilzade"
+                },
+                "driver_name": {
+                    "type": "string",
+                    "example": "John Doe"
+                },
+                "driver_vehicle": {
+                    "type": "string",
+                    "example": "Tayota Prius"
+                }
+            }
+        },
+        "RideItem": {
+            "id": "Ride",
+            "type": "object",
+            "properties": {
+                "rideId": {
+                    "type": "number",
+                    "example": 1
+                },
+                "startLat": {
+                    "type": "number",
+                    "format": "float",
+                    "example": 40.39080707999529
+                },
+                "startLong": {
+                    "type": "number",
+                    "format": "float",
+                    "example": 49.820242671837995
+                },
+                "endLat": {
+                    "type": "number",
+                    "format": "float",
+                    "example": 40.39393261968511
+                },
+                "endLong": {
+                    "type": "number",
+                    "format": "float",
+                    "example": 49.831156580485874
+                },
+                "riderName": {
+                    "type": "string",
+                    "example": "Jamal Ismayilzade"
+                },
+                "driverName": {
+                    "type": "string",
+                    "example": "John Doe"
+                },
+                "driverVehicle": {
+                    "type": "string",
+                    "example": "Tayota Prius"
+                }
+            }
+        }
+    },
+    "externalDocs": {
+        "description": "Find out more about Swagger",
+        "url": "http://swagger.io"
+    }
+}
