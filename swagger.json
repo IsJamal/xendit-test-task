@@ -20,19 +20,33 @@
         }
     ],
     "schemes": [
-        "https",
         "http"
     ],
     "paths": {
         "/health": {
             "get": {
+                "summary": "Health check",
                 "tags": [
                     "health"
-                ]
-            },
-            "responses": {
-                "200": {
-                    "description": "successful operation"
+                ],
+                "consumes": [
+                    "text/plain"
+                ],
+                "produces": [
+                    "text/plain"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "text/plain": {
+                                "schama": {
+                                    "type": "string",
+                                    "example": "Healthy"
+                                }
+                            }
+                        }
+                    }
                 }
             }
         },
@@ -42,7 +56,7 @@
                     "rides"
                 ],
                 "summary": "Create new ride",
-                "description": "",
+                "description": "This method create new ride for rider",
                 "consumes": [
                     "application/json"
                 ],
@@ -52,11 +66,11 @@
                 "parameters": [
                     {
                         "in": "body",
-                        "name": "body",
-                        "description": "Ride object that needs to be added",
+                        "name": "ride",
                         "required": true,
+                        "description": "Ride object that needs to be added",
                         "schema": {
-                            "$ref": "#/definitions/Ride"
+                            "$ref": "#/definitions/RidePayload"
                         }
                     }
                 ],
@@ -64,18 +78,10 @@
                     "200": {
                         "description": "successful operation",
                         "schema": {
-                            "$ref": "#/definitions/Ride"
+                            "$ref": "#/definitions/RideItem"
                         }
                     }
-                },
-                "security": [
-                    {
-                        "petstore_auth": [
-                            "write:pets",
-                            "read:pets"
-                        ]
-                    }
-                ]
+                }
             },
             "get": {
                 "tags": [
@@ -92,17 +98,14 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Ride"
+                                "$ref": "#/definitions/RideItem"
                             }
                         }
-                    },
-                    "400": {
-                        "description": "Invalid tag value"
                     }
                 }
             }
         },
-        "/rides/{id}":{
+        "/rides/{id}": {
             "get": {
                 "tags": [
                     "rides"
@@ -127,14 +130,11 @@
                     "200": {
                         "description": "successful operation",
                         "schema": {
-                            "$ref": "#/definitions/Ride"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/RideItem"
+                            }
                         }
-                    },
-                    "400": {
-                        "description": "Invalid ID supplied"
-                    },
-                    "404": {
-                        "description": "Ride not found"
                     }
                 }
             }
@@ -152,33 +152,83 @@
                 }
             }
         },
-        "Ride": {
+        "RidePayload": {
+            "id": "Ride",
             "type": "object",
             "properties": {
                 "start_lat": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "number",
+                    "format": "float",
+                    "example": 40.39080707999529
                 },
                 "start_long": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "number",
+                    "format": "float",
+                    "example": 49.820242671837995
                 },
                 "end_lat": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "number",
+                    "format": "float",
+                    "example": 40.39393261968511
                 },
                 "end_long": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "number",
+                    "format": "float",
+                    "example": 49.831156580485874
                 },
                 "rider_name": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Jamal Ismayilzade"
                 },
                 "driver_name": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "John Doe"
                 },
                 "driver_vehicle": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Tayota Prius"
+                }
+            }
+        },
+        "RideItem": {
+            "id": "Ride",
+            "type": "object",
+            "properties": {
+                "rideId": {
+                    "type": "number",
+                    "example": 1
+                },
+                "startLat": {
+                    "type": "number",
+                    "format": "float",
+                    "example": 40.39080707999529
+                },
+                "startLong": {
+                    "type": "number",
+                    "format": "float",
+                    "example": 49.820242671837995
+                },
+                "endLat": {
+                    "type": "number",
+                    "format": "float",
+                    "example": 40.39393261968511
+                },
+                "endLong": {
+                    "type": "number",
+                    "format": "float",
+                    "example": 49.831156580485874
+                },
+                "riderName": {
+                    "type": "string",
+                    "example": "Jamal Ismayilzade"
+                },
+                "driverName": {
+                    "type": "string",
+                    "example": "John Doe"
+                },
+                "driverVehicle": {
+                    "type": "string",
+                    "example": "Tayota Prius"
                 }
             }
         }

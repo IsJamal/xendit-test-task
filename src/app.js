@@ -97,6 +97,7 @@ module.exports = (db) => {
     });
 
     app.get('/rides/:id', (req, res) => {
+        console.log(req.params)
         db.all(`SELECT * FROM Rides WHERE rideID='${req.params.id}'`, function (err, rows) {
             if (err) {
                 return res.send({
