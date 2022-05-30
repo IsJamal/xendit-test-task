@@ -1,0 +1,190 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Api documentation of 'Xendit Coding Exercise' server.",
+        "version": "1.0.0",
+        "title": "Xendit Coding Exercise",
+        "contact": {
+            "email": "camal.ismayilzade@gmail.com"
+        }
+    },
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "health",
+            "description": "Liveness probe"
+        },
+        {
+            "name": "rides",
+            "description": "Operation about Rides"
+        }
+    ],
+    "schemes": [
+        "https",
+        "http"
+    ],
+    "paths": {
+        "/health": {
+            "get": {
+                "tags": [
+                    "health"
+                ]
+            },
+            "responses": {
+                "200": {
+                    "description": "successful operation"
+                }
+            }
+        },
+        "/rides": {
+            "post": {
+                "tags": [
+                    "rides"
+                ],
+                "summary": "Create new ride",
+                "description": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Ride object that needs to be added",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Ride"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Ride"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            },
+            "get": {
+                "tags": [
+                    "rides"
+                ],
+                "summary": "List rides",
+                "description": "This method list rides",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Ride"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid tag value"
+                    }
+                }
+            }
+        },
+        "/rides/{id}":{
+            "get": {
+                "tags": [
+                    "rides"
+                ],
+                "summary": "Get ride by id",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of ride that needs to be fetched",
+                        "required": true,
+                        "type": "integer",
+                        "maximum": 10,
+                        "minimum": 1,
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Ride"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Ride not found"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error_code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "Ride": {
+            "type": "object",
+            "properties": {
+                "start_lat": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "start_long": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "end_lat": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "end_long": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "rider_name": {
+                    "type": "string"
+                },
+                "driver_name": {
+                    "type": "string"
+                },
+                "driver_vehicle": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "externalDocs": {
+        "description": "Find out more about Swagger",
+        "url": "http://swagger.io"
+    }
+}
