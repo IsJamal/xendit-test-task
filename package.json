@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "mocha tests",
-    "start": "node index.js"
+    "start": "node index.js",
+    "lint": "eslint src"
   },
   "keywords": [
     "Xendit"
@@ -21,8 +22,19 @@
     "sqlite3": "^4.0.6",
     "swagger-ui-express": "^4.4.0"
   },
+  "eslint": "^8.16.0",
   "devDependencies": {
+    "eslint": "^6.8.0",
     "mocha": "^6.1.4",
+    "nyc": "^15.1.0",
     "supertest": "^4.0.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IsJamal/xendit-test-task.git"
+  },
+  "bugs": {
+    "url": "https://github.com/IsJamal/xendit-test-task/issues"
+  },
+  "homepage": "https://github.com/IsJamal/xendit-test-task#readme"
 }
