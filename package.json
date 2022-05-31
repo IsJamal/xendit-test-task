@@ -7,14 +7,14 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "mocha tests",
+    "test": "nyc mocha tests",
     "start": "node index.js",
     "lint": "eslint src",
     "coverage": "nyc npm run test"
   },
   "pre-push": [
     "lint",
-    "coverage"
+    "test"
   ],
   "keywords": [
     "Xendit"
@@ -25,7 +25,8 @@
     "body-parser": "^1.19.0",
     "express": "^4.16.4",
     "sqlite3": "^4.0.6",
-    "swagger-ui-express": "^4.4.0"
+    "swagger-ui-express": "^4.4.0",
+    "winston": "^3.7.2"
   },
   "eslint": "^8.16.0",
   "devDependencies": {

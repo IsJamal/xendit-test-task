@@ -1,12 +1,9 @@
 'use strict';
 
-const express = require('express');
-const app = express();
 const port = 8010;
-const swagger = require('swagger-ui-express')
-const swaggerDocument = require('./swagger.json')
-const bodyParser = require('body-parser');
-const jsonParser = bodyParser.json();
+const swagger = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+const logger = require('./src/logger');
 
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database(':memory:');
@@ -17,6 +14,6 @@ db.serialize(() => {
     buildSchemas(db);
 
     const app = require('./src/app')(db);
-    app.use('/docs',swagger.serve,swagger.setup(swaggerDocument))
-    app.listen(port, () => console.log(`App started and listening on port ${port}`));
+    app.use('/docs',swagger.serve,swagger.setup(swaggerDocument));
+    app.listen(port, () => logger.info(`App started and listening on port ${port}`));
 });
