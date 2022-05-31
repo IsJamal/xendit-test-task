@@ -1,10 +1,11 @@
 const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, label, json } = format;
+const config = require('../config');
 
 const logFileOptions = {
     level: 'info',
     filename: `logs/app.log`,
-    handleExceptions: true,
+    handleExceptions: false,
     json: true,
     maxsize: 5242880,
     maxFiles: 5,
@@ -13,7 +14,7 @@ const logFileOptions = {
 
 const logger = createLogger({
     format: combine(
-        label({ label: 'module_name' }),
+        label({ label: config.appName }),
         timestamp(),
         json()
     ),
