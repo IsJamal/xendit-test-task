@@ -5,7 +5,5 @@ scripts:
   - echo '*******START*******'
   - echo 'Intalling dependencies'
   - npm install
-  - echo 'Linting'
-  - npm run lint
   - echo 'Testing'
   - npm run test

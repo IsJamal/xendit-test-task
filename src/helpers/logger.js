@@ -4,7 +4,7 @@ const config = require('../config');
 
 const logFileOptions = {
     level: 'info',
-    filename: `logs/app.log`,
+    filename: config.logFile,
     handleExceptions: false,
     json: true,
     maxsize: 5242880,
