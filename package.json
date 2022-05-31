@@ -13,7 +13,7 @@
     "coverage": "nyc npm run test"
   },
   "prepush": {
-    "run": [
+    "tasks": [
       "lint",
       "test"
     ]
