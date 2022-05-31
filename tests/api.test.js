@@ -107,4 +107,13 @@ describe('API tests', async () => {
         });
     });
 
+    describe('GET /rides/:id', () => {
+        it('should return validation error', (done) => {
+            request(app)
+                .get("/rides/1' or '1'='1")
+                .expect('Content-Type', /json/)
+                .expect(422, done);
+        });
+    });
+
 });
