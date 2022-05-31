@@ -12,7 +12,12 @@
     "lint": "eslint src",
     "coverage": "nyc npm run test"
   },
-  "prepush": ["lint", "test"],
+  "prepush": {
+    "run": [
+      "lint",
+      "test"
+    ]
+  },
   "keywords": [
     "Xendit"
   ],
