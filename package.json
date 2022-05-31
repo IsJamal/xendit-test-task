@@ -10,14 +10,9 @@
     "test": "nyc mocha tests",
     "start": "node index.js",
     "lint": "eslint src",
-    "coverage": "nyc npm run test",
-    "prepush": "npm run lint & npm run test"
+    "coverage": "nyc npm run test"
   },
-  "prepush": {
-    "tasks": [
-      "npm run prepush"
-    ]
-  },
+  "pre-push": ["lint", "test"],
   "keywords": [
     "Xendit"
   ],
