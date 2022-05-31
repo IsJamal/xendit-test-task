@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - 9
+scripts:
+  - echo '*******START*******'
+  - echo 'Intalling dependencies'
+  - npm install
+  - echo 'Linting'
+  - npm run lint
+  - echo 'Testing'
+  - npm run test
