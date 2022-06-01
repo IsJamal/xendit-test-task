@@ -3,6 +3,8 @@ config:
   phases:
     - duration: 30
       arrivalRate: 100
+  ensure:
+    p99: 50
 scenarios:
   - name: "creating new ride"
     flow:
