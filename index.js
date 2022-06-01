@@ -2,12 +2,12 @@
 
 const config = require('./src/config');
 
-const logger = require('./src/helpers/logger');
+const logger = require('./src/helpers/log.helper');
 const { db } = require('./src/models');
 const app = require('./src/app');
 
 
-const buildSchemas = require('./src/schemas');
+const buildSchemas = require('./src/helpers/schema.helper');
 
 db.serialize(() => {
     buildSchemas(db);

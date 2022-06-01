@@ -1,6 +1,6 @@
 const ridesService = require('../src/services/rides.service');
 const { expect } = require('chai');
-describe('SERVICE tests', () => {
+describe('service test cases', () => {
 
     describe('create new ride', () => {
         it('should throw an error', (done) => {
@@ -13,7 +13,7 @@ describe('SERVICE tests', () => {
 
     describe('get ride by id', () => {
         it('should throw an error', (done) => {
-            ridesService.getRideById('').catch(err=>{
+            ridesService.getRideById({id:1}).catch(err=>{
                 expect(err).instanceOf(Error);
                 done();
             });

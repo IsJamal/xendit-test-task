@@ -1,6 +1,8 @@
-const { AppError } = require('../helpers/errors');
+const { AppError } = require('../helpers/error.helper');
+const logger = require('../helpers/log.helper');
 
 module.exports = (err, req, res, next) => {
+    logger.error(err.message);
     if (err instanceof AppError) {
         res.status(err.status).send(err.json());
     } else {
