@@ -1,0 +1,32 @@
+config:
+  target: "http://localhost:8010"
+  phases:
+    - duration: 30
+      arrivalRate: 100
+scenarios:
+  - name: "creating new ride"
+    flow:
+      - post:
+          url: "/rides"
+          json:
+            start_lat: 40.39080707999529
+            start_long: 49.820242671837995
+            end_lat: 40.39393261968511
+            end_long: 49.831156580485874
+            rider_name: "Jamal Ismayilzade"
+            driver_name: "John Doe"
+            driver_vehicle: "Tayota Prius"
+          expect:
+            - statusCode: 200
+  - name: "list rides"
+    flow:
+      - get:
+          url: "/rides"
+          expect:
+            - statusCode: 200
+  - name: "get ride by id"
+    flow:
+      - get:
+          url: "/rides/1"
+          expect:
+            - statusCode: 200
