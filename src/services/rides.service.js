@@ -27,9 +27,9 @@ function listRides() {
 
 
 function getRideById(id) {
-    const selectQuery = `SELECT * FROM Rides WHERE rideID=${id}`;
+    const selectQuery = 'SELECT * FROM Rides WHERE rideID=?';
     return new Promise((resolve, reject) => {
-        db.all(selectQuery, function (err, rows) {
+        db.all(selectQuery, id, function (err, rows) {
             if (err) return reject(new ServerError('Unknown error'));
             if (rows.length === 0) return reject(new RidesNotFoundError('Could not find any rides'));
             resolve(rows);

@@ -1,5 +1,13 @@
 const { body, param } = require('express-validator');
 const checker = require('../../middlewares/validation.middleware');
+
+function isAlphanumericWithSpace(value) {
+    let regex = /[`@#$%^&()_+\-=[\]{}'"\\|<>/~]/;
+    if (regex.test(value))
+        throw new Error('This field must be alphanumeric');
+    return true;
+}
+
 const startLat = body('start_lat')
     .exists().withMessage('Start latitude must provide')
     .isFloat({ min: -90, max: 90 }).withMessage('Start latitude must be between -90 to 90 respectively');
@@ -18,18 +26,21 @@ const endLong = body('end_long')
 
 const riderName = body('rider_name')
     .exists().withMessage('Rider name must provide')
+    .custom(isAlphanumericWithSpace)
     .isString().withMessage('Rider name must be string')
     .isLength({ min: 1, max: 255 }).withMessage('Rider name must be a non empty string');
 
 
 const driverName = body('driver_name')
     .exists().withMessage('Driver name must provide')
+    .custom(isAlphanumericWithSpace)
     .isString().withMessage('Driver name must be string')
     .isLength({ min: 1, max: 255 }).withMessage('Driver name must be a non empty string');
 
 
 const driverVehicle = body('driver_vehicle')
     .exists().withMessage('Driver vehicle must provide')
+    .custom(isAlphanumericWithSpace)
     .isString().withMessage('Driver vehicle must be string')
     .isLength({ min: 1, max: 255 }).withMessage('Driver vehicle must be a non empty string');
 
