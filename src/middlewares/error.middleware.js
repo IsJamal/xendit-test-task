@@ -1,5 +1,5 @@
-const { AppError } = require('../helpers/errors');
-const logger = require('../helpers/logger');
+const { AppError } = require('../helpers/error.helper');
+const logger = require('../helpers/log.helper');
 
 module.exports = (err, req, res, next) => {
     logger.error(err.message);

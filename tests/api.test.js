@@ -5,7 +5,7 @@ const request = require('supertest');
 const { db } = require('../src/models');
 
 const app = require('../src/app');
-const buildSchemas = require('../src/schemas');
+const buildSchemas = require('../src/helpers/schema.helper');
 
 const ridePayload = {
     "start_lat": 40.39080707999529,

@@ -1,5 +1,5 @@
 const { db } = require('../models');
-const { ServerError, RidesNotFoundError } = require('../helpers/errors');
+const { ServerError, RidesNotFoundError } = require('../helpers/error.helper');
 function createNewRide(values) {
     const insertQuery = 'INSERT INTO Rides(startLat, startLong, endLat, endLong, riderName, driverName, driverVehicle) VALUES (?, ?, ?, ?, ?, ?, ?)';
     const selectQuery = 'SELECT * FROM Rides WHERE rideID = ?';
