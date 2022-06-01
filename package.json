@@ -12,10 +12,11 @@
     "lint": "eslint --fix src",
     "test:load": "artillery run load-test.yml"
   },
-  "pre-push": [
-    "lint",
-    "test"
-  ],
+  "husky": {
+    "hooks": {
+      "pre-push": "npm test"
+    }
+  },
   "keywords": [
     "Xendit"
   ],
@@ -37,9 +38,9 @@
   "devDependencies": {
     "artillery": "^1.6.1",
     "eslint": "^6.8.0",
+    "husky": "^8.0.1",
     "mocha": "^6.1.4",
     "nyc": "^15.1.0",
-    "pre-push": "^0.1.2",
     "supertest": "^4.0.2"
   },
   "repository": {
