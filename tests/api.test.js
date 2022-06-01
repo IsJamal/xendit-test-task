@@ -28,6 +28,16 @@ const ridePayloadForValidation = {
     "driver_vehicle": null
 };
 
+const ridePayloadForSQLi = {
+    "start_lat": 40.39080707999529,
+    "start_long": 49.820242671837995,
+    "end_lat": 40.39393261968511,
+    "end_long": 49.831156580485874,
+    "rider_name": "1' or '1'='1",
+    "driver_name": "1' or '1'='1",
+    "driver_vehicle": "1' or '1'='1"
+};
+
 
 describe('API tests', async () => {
     before((done) => {
@@ -60,12 +70,22 @@ describe('API tests', async () => {
     });
 
     describe('POST /rides', () => {
-        it('should new ride', (done) => {
+        it('should create new ride', (done) => {
             request(app)
                 .post('/rides')
                 .send(ridePayload)
                 .expect('Content-Type', /json/)
                 .expect(200, done);
+        });
+    });
+
+    describe('POST /rides', () => {
+        it('should return validation error', (done) => {
+            request(app)
+                .post('/rides')
+                .send(ridePayloadForSQLi)
+                .expect('Content-Type', /json/)
+                .expect(422, done);
         });
     });
 
